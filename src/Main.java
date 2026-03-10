@@ -1,9 +1,5 @@
-import inventory.RoomInventory;
-import model.*;
-import service.RoomSearchService;
-
-import java.util.ArrayList;
-import java.util.List;
+import reservation.Reservation;
+import reservation.BookingRequestQueue;
 
 public class Main {
 
@@ -11,25 +7,24 @@ public class Main {
 
         System.out.println("Hotel Booking Management System v1.0");
 
-        // Initialize inventory
-        RoomInventory inventory = new RoomInventory();
+        // Initialize booking queue
+        BookingRequestQueue bookingQueue = new BookingRequestQueue();
 
-        // Create room objects
-        Room single = new SingleRoom();
-        Room doubleRoom = new DoubleRoom();
-        Room suite = new SuiteRoom();
+        // Guests submit booking requests
+        Reservation r1 = new Reservation("Alice", "Single Room");
+        Reservation r2 = new Reservation("Bob", "Double Room");
+        Reservation r3 = new Reservation("Charlie", "Suite Room");
 
-        List<Room> rooms = new ArrayList<>();
+        bookingQueue.addRequest(r1);
+        bookingQueue.addRequest(r2);
+        bookingQueue.addRequest(r3);
 
-        rooms.add(single);
-        rooms.add(doubleRoom);
-        rooms.add(suite);
+        // Display queued requests
+        bookingQueue.displayQueue();
 
-        // Search service
-        RoomSearchService searchService = new RoomSearchService(inventory);
-
-        // Perform search
-        searchService.searchAvailableRooms(rooms);
+        // Peek next request
+        System.out.println("\nNext request to process:");
+        bookingQueue.peekNextRequest().displayRequest();
 
     }
 }
