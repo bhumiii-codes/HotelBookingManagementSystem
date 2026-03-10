@@ -21,4 +21,8 @@ public abstract class Room {
         System.out.println("Beds: " + beds);
         System.out.println("Price: $" + price);
     }
+
+    public String getRoomType() {
+        return roomType;
+    }
 }

@@ -1,4 +1,9 @@
 import inventory.RoomInventory;
+import model.*;
+import service.RoomSearchService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -9,18 +14,22 @@ public class Main {
         // Initialize inventory
         RoomInventory inventory = new RoomInventory();
 
-        // Display current inventory
-        inventory.displayInventory();
+        // Create room objects
+        Room single = new SingleRoom();
+        Room doubleRoom = new DoubleRoom();
+        Room suite = new SuiteRoom();
 
-        // Example lookup
-        System.out.println("\nAvailable Single Rooms: "
-                + inventory.getAvailability("Single Room"));
+        List<Room> rooms = new ArrayList<>();
 
-        // Example update
-        inventory.updateAvailability("Single Room", 4);
+        rooms.add(single);
+        rooms.add(doubleRoom);
+        rooms.add(suite);
 
-        System.out.println("\nAfter update:");
+        // Search service
+        RoomSearchService searchService = new RoomSearchService(inventory);
 
-        inventory.displayInventory();
+        // Perform search
+        searchService.searchAvailableRooms(rooms);
+
     }
 }
