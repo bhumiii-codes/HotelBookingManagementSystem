@@ -37,4 +37,8 @@ public class BookingRequestQueue {
     public Reservation peekNextRequest() {
         return requestQueue.peek();
     }
+
+    public Reservation pollRequest() {
+        return requestQueue.poll();
+    }
 }

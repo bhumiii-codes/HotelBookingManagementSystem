@@ -1,5 +1,6 @@
-import reservation.Reservation;
-import reservation.BookingRequestQueue;
+import inventory.RoomInventory;
+import reservation.*;
+import booking.BookingService;
 
 public class Main {
 
@@ -7,24 +8,21 @@ public class Main {
 
         System.out.println("Hotel Booking Management System v1.0");
 
-        // Initialize booking queue
-        BookingRequestQueue bookingQueue = new BookingRequestQueue();
+        RoomInventory inventory = new RoomInventory();
 
-        // Guests submit booking requests
-        Reservation r1 = new Reservation("Alice", "Single Room");
-        Reservation r2 = new Reservation("Bob", "Double Room");
-        Reservation r3 = new Reservation("Charlie", "Suite Room");
+        BookingRequestQueue queue = new BookingRequestQueue();
 
-        bookingQueue.addRequest(r1);
-        bookingQueue.addRequest(r2);
-        bookingQueue.addRequest(r3);
+        queue.addRequest(new Reservation("Alice", "Single Room"));
+        queue.addRequest(new Reservation("Bob", "Double Room"));
+        queue.addRequest(new Reservation("Charlie", "Suite Room"));
 
-        // Display queued requests
-        bookingQueue.displayQueue();
+        BookingService bookingService = new BookingService(inventory, queue);
 
-        // Peek next request
-        System.out.println("\nNext request to process:");
-        bookingQueue.peekNextRequest().displayRequest();
+        bookingService.processNextReservation();
+        bookingService.processNextReservation();
+        bookingService.processNextReservation();
+
+        bookingService.displayAllocations();
 
     }
 }
